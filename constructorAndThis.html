@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Constructor and This</title>
+    </head>
+    <body>
+
+        <!-- OOP Javascript 
+            ecmas 5 => OOP =>  prototype
+            Constructor Function (if you don't want to create each value in array you can use this )
+            => Example instead of let arr = {
+                name: "aung",
+                age: 10,
+            } ;
+            let arr1 = {
+                name: "aaa",
+                age: 30
+            }
+            you can use with constructor like that as below
+           
+        -->
+
+
+    <script>
+
+        function Person(name , age){
+            this.name = name;
+            this.age = age;
+            // you can also use method
+            this.getName = () => {
+                return this.name;
+            }
+        }
+
+        let p1 = new Person("Kris Koe" , 30);
+        let p2 = new Person("John" , 24);
+
+        console.log(p1.getName());
+
+        
+
+    </script>
+    </body>
+</html>

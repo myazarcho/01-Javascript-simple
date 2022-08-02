@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <form name="myForm" action="">
+            <label for="age">Age</label>
+            <input type="number" name="age" id="age" />
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+          
+        //   1. Alert message on click
+            // document.querySelector('button').addEventListener('click' , function(e){
+            //     if (document.querySelector('#age').value < 18){
+            //         e.preventDefault();
+            //         alert ("You must older than 18");
+            //     }
+
+            //     else{
+            //         alert("You can.")
+            //     }
+
+            // });
+
+        // 2. Alert box before closing the window
+
+        var showDialog = (e) => {
+                return 'Dialog text here.';
+            };
+        window.addEventListener("beforeunload", showDialog);
+
+
+        </script>
+    </body>
+</html>

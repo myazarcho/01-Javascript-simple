@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+     <!-- UIkit CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
+
+     <!-- UIkit JS -->
+     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit-icons.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+     <style>
+            .select-country .buttons-wrapper{
+                width: 300px;
+                margin-right: 40px;
+            }
+            #country{
+                width: calc(100% - 300px);
+            }
+            #output {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-bottom: 10%;
+                border: 3px solid #fff;
+                box-sizing: border-box;
+                gap: 40px;
+            }
+
+            #output .item {
+                width: calc(100% / 5);
+            }
+     </style>
+</head>
+<body>
+
+    <section class="select-country">
+        <div class="uk-container">
+            <h1 style="margin-top: 40px;">Select the Video Type</h1>
+            <div class="row">
+                <div class="twelve columns">
+                    <section class="text-center uk-flex" >
+                        <div class="buttons-wrapper uk-flex" style="flex-direction: column;">
+                            <button class="uk-button button2 uk-button-default" value="film">Film</button>
+                            <button class="uk-button button2 uk-button-default" value="animation">Animation</button>
+                          
+                        </div>
+                        <span id="output"></span>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        window.onload = function() {
+            apiFetch()
+        }
+
+        $(".button2").click(function() {
+            var button = $(this).val();
+            console.log(button);
+            apiFetch(button);
+        });
+
+
+
+        var apiFetch = function(button) {
+        var baseUrl = 'https://pixabay.com/api/videos/';
+        var key = '28991170-fa1763f80abc00337ec4fc61e';
+        var min_width = 500;
+        var min_height = 500;
+    
+        var per_page = 3;
+        var video_type  = button;
+        var q = "";
+        var finalURL = baseUrl + "?key=" + key + "&q=" + q +"&min_width=" + min_width + "&min_height=" + min_height + "&video_type=" + video_type + "&per_page" + per_page ;
+
+        fetch(finalURL)
+            .then((res) => res.json())
+            .then((data) => {
+            let output = '<h5 hidden>Images</h5>'
+            data.hits.forEach(function(video){
+                output += `
+                <p class="item">
+                    <video width="320" height="240" autoplay muted>
+                    <source src="${ video.videos.large.url }" type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video>
+                    ${video.type}
+                    ${video.tags}
+                </p>
+                
+                `;
+            });
+            document.getElementById('output').innerHTML = output;
+           
+            })
+        }
+    </script>
+</body>
+
+</html>

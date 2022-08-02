@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+
+     <!-- UIkit CSS -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
+
+     <!-- UIkit JS -->
+     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/js/uikit-icons.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+     <style>
+                    /* Genaral */
+            * {
+            padding: 0;
+            margin: 0;
+            }
+
+            h1 {
+                font-size: 1.2em;
+                margin: 0;
+            }
+
+            p {
+                margin: 0;
+                padding: 0;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .buttons-wrapper {
+                margin: 8% 0;
+            }
+
+            .header,
+            .footer {
+                background-color: #f5f5f5;
+                padding: 1% 0;
+                border-bottom: solid 1px #ddd;
+            }
+
+            .header a {
+                color: #355C7D;
+            }
+
+            /* Pixabay API */
+            #output {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-bottom: 10%;
+                border: 3px solid #fff;
+                box-sizing: border-box;
+            }
+
+            #output .item {
+                width: calc(100% / 5);
+            }
+
+            #output .item img {
+                display: block;
+                object-fit: cover;
+                max-width: 100%;
+                height: 250px;
+                margin-top: 4px;
+            }
+
+            #output .item img:hover {
+                opacity: 0.8;
+            }
+
+            #runners{
+                display: flex;
+                list-style: none;
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
+                flex-basis: 80%;
+            }
+            #runners li{
+                flex-basis: 20%;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 25px;
+                align-items: center;
+            }
+            #runners li span{
+                font-family: serif;
+                font-size: 1em;
+                color: #3f3f3f;
+                text-align: center;
+            }
+            #runners li img {
+                margin: 6px;
+                border-radius: 4px;
+                box-shadow: 1px 1px 2px rgba(0,0,0,.1); 
+            }
+
+            .select-country .buttons-wrapper{
+                width: 300px;
+            }
+            #country{
+                width: calc(100% - 300px);
+            }
+        
+            @media (max-width: 1024px) {
+                #output .item {
+                    width: 50%;
+                }
+                
+                #output .item img {
+                    height: 350px;
+                    margin: 1px 0px;
+                }
+            }
+
+            @media (max-width: 768px) {
+            #output {
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                margin: 10% 0;
+            }
+
+            #output .item {
+                width: 100%;
+            }
+            
+            #output .item img {
+                height: 350px;
+                margin: 2px auto;
+            }
+            }
+     </style>
+
+</head>
+<body>
+   
+    <section class="uk-container uk-text-center" >
+        <h1 style="margin-top: 40px;">Choose the Category</h1>
+        <div class="row">
+          <div class="twelve columns">
+            <section class="text-center">
+              <div class="buttons-wrapper">
+                  <button class="uk-button button1 uk-button-default" value="nature">Nature</button>
+                  <button class="uk-button button1 uk-button-default" value="computer">Computer</button>
+                  <button class="uk-button button1 uk-button-default" value="backgrounds">Backgrounds</button>
+                  <button class="uk-button button1 uk-button-default" value="business">Business</button>
+              </div>
+              <span id="output"></span>
+            </section>
+          </div>
+        </div>
+    </section>
+
+
+   
+
+    <section class="uk-container uk-text-center user-list">
+        <h1>Random Users</h1>
+        <ul id="runners"></ul>
+    </section>
+
+
+    <!-- ********** Language *********** -->
+
+    
+
+    <script>
+
+        window.onload = function() {
+            apiFetch()
+        }
+
+        $(".button1").click(function() {
+            var fired_button = $(this).val();
+            apiFetch(fired_button);
+        });
+
+
+
+        var apiFetch = function(fired_button) {
+        var baseUrl = 'https://pixabay.com/api/';
+        var key = '2022970-be88b0f8e25d6d2c5d51db517';
+        var orientation = "verticle";
+        var min_height = 500;
+        var colors = "orange";
+        var per_page = 9;
+        var category = fired_button;
+        var q = "";
+        var finalURL = baseUrl + "?key=" + key + "&orientation=" + orientation + "&min_height=" + min_height + "&colors=" + colors + "&per_page=" + per_page + "&q=" + q + "&category=" + category  ;
+
+        fetch(finalURL)
+            .then((res) => res.json())
+            .then((data) => {
+            let output = '<h5 hidden>Images</h5>'
+            data.hits.forEach(function(image){
+                output += `
+                <p class="item">
+                    <a class="image-link" href="${image.largeImageURL}">
+                    <img src="${image.largeImageURL}" alt="${image.tags}" >
+                    </a>    
+                </p>
+                `;
+            });
+            document.getElementById('output').innerHTML = output;
+           
+            })
+        }
+    
+   
+       
+        //******** Random User *******//
+
+        const ul = document.getElementById('runners'),
+        url = 'https://randomuser.me/api/?results=10';
+        const createNode = (element) => { return document.createElement(element); }
+        const append = (parent, el) => { return parent.appendChild(el); }
+
+        fetch(url)
+            .then((response) => { return response.json(); })
+            .then( data => {
+                let runners = data.results; 
+                return runners.map( runner => { 
+                
+                let li = createNode('li'), 
+                    img = createNode('img'),
+                    span = createNode('span');
+                    p1 = createNode('p');
+                    p2 = createNode('p');
+                    p3 = createNode('p');
+                img.src = runner.picture.medium;  
+                span.innerHTML = `${runner.name.first} ${runner.name.last} `;
+                p1.innerHTML = `${runner.email}`; 
+                p2.innerHTML = `${runner.location.street.number}, ${runner.location.street.name}`;
+                p3.innerHTML = `${moment(runner.dob.date).format('D MMM YYYY')}, ${runner.dob.age}`;
+                append(li, img); 
+                append(li, span);
+                append(li, p1);
+                append(li, p2);
+                append(li, p3);
+                append(ul, li);
+
+                });
+            })
+            .catch( error => { console.log(error); })
+
+       
+        
+
+
+    </script>
+    <script src="js/moment.min.js"></script>
+</body>
+</html>

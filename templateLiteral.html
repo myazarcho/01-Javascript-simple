@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <h1 class="h1">Hello World</h1>
+
+        <h2 id="h2">This is the testing for MYA.</h2>
+        <!--1 =Element
+            2 = Attribute 
+            3 = Text Node
+            8 = Comment
+            9 = Document itself 
+            10 = Doctype
+        -->
+        <ul class="lis">
+            <li>Yellow</li>
+            <li>Orange</li>
+            <li>Green</li>
+            <li>Red</li>
+            <li>Purple</li>
+            <!-- <li><a>White</a></li> -->
+        </ul>
+
+
+
+        <script src="app.js"></script>
+        <script>
+                let lists = document.querySelector(".lis");
+                // console.log(lists.childNodes);
+                // for( let i=0; i < 11 ; i++ ){
+
+                //     let nodes = lists.childNodes[i];
+                //     console.log(nodes);
+
+                //     if(nodes.nodeType == 10) {
+                //         console.log(nodes.childNodes[0].textContent);
+                //     }
+                // }
+                let textNode = document.createTextNode('White');
+
+                let aTag = document.createElement('a');
+                aTag.setAttribute('href','#');
+                aTag.appendChild(textNode);
+
+                let li = document.createElement('li')
+                li.appendChild(aTag);
+
+                lists.appendChild(li);
+
+
+                let newText = document.createTextNode("This is new Text for MYA.");
+                let newH1 = document.createElement('h1');
+                newH1.appendChild(newText);
+
+                document.querySelector('#h2').replaceWith(newH1);
+            
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+        <div>
+            <h2>Loacal Storage</h2>
+            <form> 
+                <input id="name"> <p></p>
+                <input id="age"> <p></p>
+                <input type="submit" value="ADD">
+
+                <p></p>
+                
+            </form>
+            <button id="clearData">Clear Data</button>
+        </div>
+
+    
+    <script>
+
+       
+        let addToDb = (obj) => {
+            let data = JSON.stringify(obj);
+            localStorage.setItem(' localDatabase ',data);
+        }
+
+        let getData = () => {
+
+            let str = localStorage.getItem('localDatabase');
+            let obj = JSON.parse(str);
+            return obj;
+
+        }
+
+        let clearDataDelete= () => {
+            localStorage.removeItem('localDatabase');
+        }
+
+
+
+        let form =  document.querySelector("form");
+        let name = document.querySelector("#name");
+        let age = document.querySelector("#age");
+
+        
+
+        let btnDelete = document.querySelector('#clearData');
+       
+        btnDelete.addEventListener('click' , clearDataDelete);
+
+
+        form.addEventListener('submit' , (e) => {
+            e.preventDefault();
+            let getName = name.value;
+            let getAge = age.value;
+
+            let user = {
+                name : getName,
+                age: getAge
+            }
+
+            addToDb(user);
+            
+
+            
+        })
+      
+
+        
+
+    </script>
+       
+    </body>
+</html>

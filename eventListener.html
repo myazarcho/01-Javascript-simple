@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <!-- DOM EventListetner -->
+        <button id="btn_one"> Click Button One </button>
+        <button id="btn_two"> Click Button Two </button>
+        <script>
+            let btnOne = document.querySelector('#btn_one');
+            let btnTwo = document.querySelector('#btn_two');
+
+            // btn.addEventListener('dblclick' , function(e){
+            //     console.log(e);
+            // })
+
+            // btn.onclick = (e) => console.log(e);
+
+            btnOne.onclick = (e) => {
+                alert(e.target.innerText);
+            }
+
+            btnTwo.addEventListener('click' , function(e){
+                alert(e.target.innerText);
+                // const renderedText = htmlElement.innerText;)
+            })
+        </script>
+    </body>
+</html>
