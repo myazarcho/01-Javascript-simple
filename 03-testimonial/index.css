@@ -1,0 +1,61 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+section.uk-container {
+    width: 90vw;
+    margin: auto;
+}
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+}
+span{
+    font-size: 5rem;
+
+}
+.testimonial-wrap{
+    min-height: calc(100vh - 3rem);
+    display: grid;
+    place-items: center;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.img-wrap{
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+.img-wrap img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.img-wrap::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(106, 67, 180);
+    right: -8px;
+    top: -1px;
+    z-index: -1;
+    border-radius: 50%;
+
+}
+#name{
+    text-transform: capitalize;
+}
+#position{
+    text-transform: capitalize;
+}

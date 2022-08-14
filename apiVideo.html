@@ -50,6 +50,7 @@
                           
                         </div>
                         <span id="output"></span>
+                       
                     </section>
                 </div>
             </div>
@@ -73,7 +74,7 @@
         var key = '28991170-fa1763f80abc00337ec4fc61e';
         var min_width = 500;
         var min_height = 500;
-    
+      
         var per_page = 3;
         var video_type  = button;
         var q = "";
@@ -86,12 +87,27 @@
             data.hits.forEach(function(video){
                 output += `
                 <p class="item">
-                    <video width="320" height="240" autoplay muted>
-                    <source src="${ video.videos.large.url }" type="video/mp4">
-                    Your browser does not support the video tag.
-                    </video>
-                    ${video.type}
-                    ${video.tags}
+                    <a class="uk-button uk-button-default" href="#popup" uk-toggle>
+                        <video width="320" height="240" autoplay muted>
+                        <source src="${ video.videos.large.url }" type="video/mp4">
+                        Your browser does not support the video tag.
+                        </video>
+                        ${video.type}
+                        ${video.tags}
+                    </a>
+                    <div id="popup" class="uk-flex-top" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+    
+                                <button class="uk-modal-close-default" type="button" uk-close></button>
+    
+                                <video width="320" height="240" autoplay muted>
+                                    <source src="${ video.videos.large.url }" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+    
+                            </div>
+                        </div>
+                   
                 </p>
                 
                 `;

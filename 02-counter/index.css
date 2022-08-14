@@ -1,0 +1,25 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+section.uk-container {
+    width: 90vw;
+    margin: auto;
+}
+h1{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+}
+span{
+    font-size: 5rem;
+
+}
+.counter{
+    min-height: calc(100vh - 3rem);
+    display: grid;
+    place-items: center;
+}

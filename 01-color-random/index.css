@@ -1,0 +1,39 @@
+/* Font */
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    height: 100vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+section {
+    width: 90vw;
+    margin: auto;
+}
+.color-wrap{
+    min-height: calc(100vh - 3rem);
+    display: grid;
+    place-items: center;
+}
+h1{
+    text-transform: uppercase;
+    color: #dc4848;
+    text-align: center;
+}
+h2{
+    padding: 10px 30px;
+    background: #dc4848;
+    border-radius: 5px;
+    color: #fff;
+    text-transform: capitalize;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+#btn {
+    background: #dc4848;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+}
